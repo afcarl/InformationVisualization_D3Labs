@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title>Excercise1-Information Visualization</title>
+        
+        <style>
+            h1 {
+                
+                background-color: black;
+                color: white;
+                font-weight: bold;
+            }
+            button{
+                width: 10%;
+                height: 4%;
+                border: 0px;
+                border-radius: 5px;
+            }
+            ul{
+                float: left;
+                list-style: none;
+            }
+        </style>    
+    </head>
+    <body>
+        <p1 style="font-size:20px">Your Turn [PriyaKhokher(pnk230)]</p1>
+        <hr/>    
+        <p2 id = "description">Using D3</p2>    
+        <h1>Gapminder- Wealth of Nation</h1>
+        <h2>Countries</h2>
+        
+        
+        
+        <svg width="600" height="400" transform="translate(40,20)" fill='none' stroke='black' stroke-width='5'  >
+            <g id="dotGroup" fill="none">
+                <ul id="list" ></ul>
+            </g>
+        </svg>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <script>
+            
+            d3.json("newData.json", function(error,result){
+                
+                result = result.filter(function(d) {return d.income[2006]!=undefined})
+                
+                d3.select("#list")
+                    .selectAll('li').data(result)
+                    .enter()
+                    .append("li")
+                    .text(function(d){return d.name})
+                render(result);
+            })
+            
+            
+            var data = []
+            var viz = d3.select("#div");
+            var viz1 = d3.select('#dotGroup');
+            
+            var width = 600,
+            height = 400,
+            margin = {top:90, left:20 ,right:20, bottom:20},
+            innerWidth = width - margin.left - margin.right,
+            innerHeight = height - margin.top - margin.bottom;
+            
+            var colorScale = d3.scale.category10();
+            
+            var yScale = d3.scale.linear()
+            .range([innerHeight,0])
+            
+            var xScale = d3.scale.linear()
+            .range([0,innerWidth])
+            
+            viz1.attr("transform", "translate("+ margin.left +","+margin.top+")");
+            
+            
+         
+            
+            function render(data)
+            {
+               
+                var dataPoints = viz1.selectAll("circle").data(data);
+                
+                xScale.domain(d3.extent(data, function(d){return d.income[2008]}));
+                
+                yScale.domain(d3.extent(data , function(d){return d.lifeExpectancy[2008]}));
+                
+       
+                dataPoints.enter()
+                    .append("circle")
+                    .attr('r', function(d,i) {return Math.sqrt(0.02*Math.sqrt(d.population[2008])) })
+                    .attr("cx", function(d,i){ return xScale(d.income[2008]) })
+                    .attr("cy", function(d,i){ return yScale(d.lifeExpectancy[2008]) })
+                    .attr("fill",function(d,i) {return colorScale(i)})
+                    .attr("stroke",function(d,i) {return colorScale(i)}) 
+                    .attr("opacity",0.75)
+                    
+            }
+        </script>
+            
+    </body>
+    
+
+</html>

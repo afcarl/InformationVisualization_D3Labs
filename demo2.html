@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>demo2</title> 
+    </head>
+    
+    
+    <body>
+        <h1 id="title">title</h1>
+        <label>title</label>
+        <input type="text" id="id"/>
+        <button type="button"  onclick="myFunction()">Change </button>
+        
+        <ul id='log'></ul>
+        <script>
+            
+         
+        function myFunction(){
+            
+        var newTitle = document.getElementById('id').value;
+        if(newTitle=='')
+        {
+            newTitle = "Priya Kapoor";
+            
+        }
+            document.getElementById('title').innerHTML = newTitle;
+            list(newTitle);
+        }       
+        
+        function list(newTitle){
+            var log = document.getElementById("log");
+            var newEntry = document.createElement("li");
+            newEntry.innerHTML = newTitle;
+            log.appendChild(newEntry);
+            }   
+        
+        </script>
+    </body>
+    
+</html>

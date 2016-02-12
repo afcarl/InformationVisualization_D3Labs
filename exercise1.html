@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Excercise1-Information Visualization</title>
+        
+        <style>
+            h1 {
+                
+                background-color: black;
+                color: white;
+                font-weight: bold;
+            }
+            button{
+                width: 10%;
+                height: 4%;
+                border: 0px;
+                border-radius: 5px;
+            }
+        </style>    
+    </head>
+    <body>
+        <p1 style="font-size:20px">Your Turn [PriyaKhokher(pnk230)]</p1>
+        <hr/>    
+        <p2 id = "description">Create the following page using HTML and CSS</p2>    
+        <h1>Gapminder- Wealth of Nation</h1>
+        <div>
+            <label>Name</label>
+            <input type="text" id="ip"/>
+            <button type="button" onclick="appendEntry()">Add</button>
+            
+            <hr/>        
+            <ul style="list-style: none" id="log">
+                <li>USA</li>
+                <li>Mexico</li>
+                <li>Canada</li>
+            </ul>
+            <br/>
+            <br/>
+            <br/>
+            <p3 style="color:red" id="validation"></p3>
+        </div>
+        <script>
+            function appendEntry()
+            {
+                
+                document.getElementById("description").innerHTML = "Update the previous page for users to add countries";
+                var newAddition = document.getElementById("ip").value;
+                if (!newAddition){
+                    
+                    document.getElementById("validation").innerHTML = "Please Input a name of the country"
+                }
+                else{
+                  document.getElementById("validation").innerHTML = ""  
+                }
+                
+            
+                var log = document.getElementById("log");
+                var newEntry = document.createElement("li");
+                newEntry.innerHTML = newAddition;
+                log.appendChild(newEntry);
+            }
+        </script>
+            
+    </body>
+    
+
+</html>

@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <style>
+        <title>Gapminder Health and Wealth</title>
+            .item{
+                    box-shadow: 10px 10px 10px #ccc;
+            }
+        </style> 
+    </head>
+    <body>
+        <h1>D3</h1>
+        <input id='ip' type="text"/>
+        <button onclick="addNumber()">Add button</button>
+        <div id="viz"></div>
+        
+    </body>
+    
+
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>
+    //My code
+        var viz = d3.select("#viz") 
+        var numbers = [1,2,3,4,3,5];
+        d3.json('gapminder.json', function(error, result) {
+            numbers = result;
+            number();
+        })
+        function number(){
+        var changes = viz.selectAll('div').data(numbers, function(d) {return d});
+        
+        changes.enter()
+            .append("div")
+            .style('color','red')
+            
+            .style({
+            backgroundColor: "blue",
+            border: "solid 1px #ccc"
+            
+        }).attr("class","item")
+            
+            .text(function(d) {return d.F});
+        changes.exit().remove();
+            
+        changes.on("click", function(d,i){
+                numbers.splice(i,1);
+                number();
+        })   
+        }
+        number();
+        //console.log(d3)
+        //console.log(viz);
+        function addNumber(){
+            var number1 = d3.select("#ip").node().value ;
+            numbers.push(number1);
+            number()
+        }
+    </script>
+</html>
