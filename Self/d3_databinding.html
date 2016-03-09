@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>D3 DataBinding</title>
+        <style>
+        div.bar {
+				display: inline-block;
+				width: 20px;
+				height: 75px;	/* Gets overriden by D3-assigned height below */
+				margin-right: 2px;
+				background-color: teal;
+			}
+        </style>
+    </head>
+        <body>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+            
+            <script>    
+        d3.select("body").append("p").text("New paragraph!");
+        d3.select('body').append("p").text("Priya Khokher")
+        var dataset;
+                d3.csv('data.csv', function(error,data)
+                      {
+                    if (error){
+                        console.log(error);}
+                    else{
+                        dataset = data;
+                        d3.select('body')
+                        .selectAll("p")
+                        .data(dataset)
+                        .enter()
+                        .append("p")
+                        
+                        .attr("class","bar")
+                        .style("height",20);}
+                
+                d3.select("body")
+                    .append("svg")
+                    .attr("width",20)
+                    .attr("height",20);
+                
+                
+                
+                }
+                      
+                      );
+        
+            </script>    
+        </body>
+    
+</html>

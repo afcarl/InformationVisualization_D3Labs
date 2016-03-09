@@ -23,7 +23,7 @@
             
             .tick{
                 stroke-width: 0.8;
-                opacity: 0.7;
+                opacity: 0.7;   
                 font-size: 12;
             }
             
@@ -42,8 +42,8 @@
         
         
         
-        <svg id= "viz" width="620" height="420" transform="translate(40,20)" fill='none' stroke='black' stroke-width='5'  >
-            <g id="dotGroup" fill="none">
+        <svg id= "viz" width="620" height="420" transform="translate(40,20)" fill='none' stroke='black' stroke-width='5' padding="15" >
+            <g id="dotGroup" fill="none" >
                 <ul id="list" ></ul>
             </g>
         </svg>
@@ -116,7 +116,7 @@
                 
                 colorScale.domain(d3.extent(data, function(d){return d.region}));
                 
-                xScale.domain([0,d3.max(data, function(d){return d.income[2008]})]);
+                xScale.domain([-500,d3.max(data, function(d){return d.income[2008]})]);
                 
                 yScale.domain(d3.extent(data , function(d){return d.lifeExpectancy[2008]}));
                 
